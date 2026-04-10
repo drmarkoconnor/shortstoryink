@@ -99,3 +99,15 @@ Purpose: verify end-to-end product reliability before visual refinements.
 - Optional email verification passes (or is explicitly deferred with
   manual-share fallback accepted)
 
+## Execution result (2026-04-10)
+
+- Status: ✅ Passed / phase complete
+- Operator validation devices:
+   - iPhone (mobile)
+   - laptop (desktop)
+- Result summary:
+   - All 10 smoke sequence checks passed.
+   - Reissue behavior confirmed (new link valid, old link invalid).
+   - Friendly invalid-link UX confirmed.
+   - Email delivery flow confirmed working in local and live Netlify app.
+

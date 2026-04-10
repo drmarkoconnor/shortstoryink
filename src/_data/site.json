@@ -10,7 +10,9 @@
 			{ "label": "About", "href": "/about/" },
 			{ "label": "How it works", "href": "/how-it-works/" },
 			{ "label": "Join", "href": "/join/" },
-			{ "label": "Newsletter", "href": "/newsletter/" }
+			{ "label": "Newsletter", "href": "/newsletter/" },
+			{ "label": "Writer login", "href": "/.netlify/functions/writer-login" },
+			{ "label": "Teacher login", "href": "/.netlify/functions/teacher-login" }
 		],
 		"app": [
 			{ "label": "Studio", "href": "/studio/" },
