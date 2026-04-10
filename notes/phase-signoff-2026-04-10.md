@@ -2,7 +2,8 @@
 
 ## Scope signed off
 
-This sign-off covers the completed teacher-led feedback workflow and publishing loop:
+This sign-off covers the completed teacher-led feedback workflow and publishing
+loop:
 
 - `/try/` submission flow to Supabase
 - teacher auth/login/logout
@@ -28,7 +29,8 @@ This sign-off covers the completed teacher-led feedback workflow and publishing 
 
 - Core end-to-end data flow is stable.
 - No blocker defects reported at sign-off.
-- Remaining work can now prioritize new functional modules before broad visual polish.
+- Remaining work can now prioritize new functional modules before broad visual
+  polish.
 
 ## Next-phase focus (functionality first)
 
@@ -39,4 +41,6 @@ This sign-off covers the completed teacher-led feedback workflow and publishing 
 
 ## Notes
 
-- Styling should continue in small, low-risk passes only, and should not alter form actions, hidden input names, endpoint paths, or status logic.
+- Styling should continue in small, low-risk passes only, and should not alter
+  form actions, hidden input names, endpoint paths, or status logic.
+

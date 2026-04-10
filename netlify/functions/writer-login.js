@@ -36,7 +36,9 @@ function redirectWithMessage(kind, message) {
 	const safeMessage = encodeURIComponent(message)
 	return {
 		statusCode: 302,
-		headers: { Location: `/.netlify/functions/writer-login?${kind}=${safeMessage}` },
+		headers: {
+			Location: `/.netlify/functions/writer-login?${kind}=${safeMessage}`,
+		},
 		body: '',
 	}
 }
@@ -61,7 +63,9 @@ async function passwordSignIn(email, password) {
 	})
 	if (!r.ok) {
 		const body = await r.json().catch(() => ({}))
-		throw new Error(body?.error_description || body?.msg || body?.error || 'invalid_login')
+		throw new Error(
+			body?.error_description || body?.msg || body?.error || 'invalid_login',
+		)
 	}
 	return r.json()
 }
@@ -82,7 +86,9 @@ async function passwordSignUp(email, password, firstName, emailRedirectTo) {
 	})
 	if (!r.ok) {
 		const body = await r.json().catch(() => ({}))
-		throw new Error(body?.msg || body?.error_description || body?.error || 'signup_failed')
+		throw new Error(
+			body?.msg || body?.error_description || body?.error || 'signup_failed',
+		)
 	}
 	return r.json()
 }
@@ -102,7 +108,12 @@ async function requestPasswordReset(email, emailRedirectTo) {
 
 	if (!r.ok) {
 		const body = await r.json().catch(() => ({}))
-		throw new Error(body?.msg || body?.error_description || body?.error || 'reset_request_failed')
+		throw new Error(
+			body?.msg ||
+				body?.error_description ||
+				body?.error ||
+				'reset_request_failed',
+		)
 	}
 }
 
@@ -119,7 +130,12 @@ async function resetPasswordWithRecoveryToken(accessToken, nextPassword) {
 
 	if (!r.ok) {
 		const body = await r.json().catch(() => ({}))
-		throw new Error(body?.msg || body?.error_description || body?.error || 'reset_complete_failed')
+		throw new Error(
+			body?.msg ||
+				body?.error_description ||
+				body?.error ||
+				'reset_complete_failed',
+		)
 	}
 }
 
@@ -267,7 +283,10 @@ export async function handler(event) {
 				)
 			}
 			if (!resetPassword || resetPassword.length < 8) {
-				return redirectWithMessage('error', 'Password must be at least 8 characters.')
+				return redirectWithMessage(
+					'error',
+					'Password must be at least 8 characters.',
+				)
 			}
 			if (resetPassword !== resetPasswordConfirm) {
 				return redirectWithMessage('error', 'Passwords do not match.')
@@ -302,7 +321,10 @@ export async function handler(event) {
 							'Account created. Please confirm your email before signing in.',
 						)
 					}
-					return redirectWithMessage('error', 'Account created, but sign in failed. Please try signing in again.')
+					return redirectWithMessage(
+						'error',
+						'Account created, but sign in failed. Please try signing in again.',
+					)
 				}
 			}
 		} else {
@@ -321,10 +343,16 @@ export async function handler(event) {
 	} catch (err) {
 		const msg = String(err?.message || '')
 		if (/confirm|not confirmed/i.test(msg)) {
-			return redirectWithMessage('warn', 'Please confirm your email before signing in.')
+			return redirectWithMessage(
+				'warn',
+				'Please confirm your email before signing in.',
+			)
 		}
 		if (/already registered|already exists/i.test(msg)) {
-			return redirectWithMessage('warn', 'That email already has an account. Try signing in instead.')
+			return redirectWithMessage(
+				'warn',
+				'That email already has an account. Try signing in instead.',
+			)
 		}
 		if (/invalid login credentials/i.test(msg)) {
 			return redirectWithMessage('error', 'Invalid email or password.')
@@ -335,6 +363,10 @@ export async function handler(event) {
 				'Too many requests in a short time. Please wait a few minutes and try again.',
 			)
 		}
-		return redirectWithMessage('error', 'Request failed. Please check your details and try again.')
+		return redirectWithMessage(
+			'error',
+			'Request failed. Please check your details and try again.',
+		)
 	}
 }
+
