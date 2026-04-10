@@ -1,0 +1,26 @@
+{
+	"name": "shortstory.ink",
+	"tagline": "A calm, editor-led digital writing studio.",
+	"url": "",
+	"theme": {
+		"defaultMode": "dark"
+	},
+	"nav": {
+		"public": [
+			{ "label": "About", "href": "/about/" },
+			{ "label": "How it works", "href": "/how-it-works/" },
+			{ "label": "Join", "href": "/join/" },
+			{ "label": "Newsletter", "href": "/newsletter/" }
+		],
+		"app": [
+			{ "label": "Studio", "href": "/studio/" },
+			{ "label": "Workshop", "href": "/workshop/" },
+			{ "label": "Library", "href": "/library/" },
+			{ "label": "Reading Room", "href": "/reading-room/" },
+			{ "label": "Snippets", "href": "/snippets/" },
+			{ "label": "Cohorts", "href": "/cohorts/" },
+			{ "label": "Freewriting", "href": "/freewriting/" }
+		]
+	}
+}
+

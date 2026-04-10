@@ -1,0 +1,161 @@
+.ss-reading {
+	position: relative;
+}
+
+/* Hero image wash (optional) */
+.ss-reading__hero {
+	position: relative;
+	min-height: clamp(220px, 34vh, 420px);
+	overflow: hidden;
+	border-bottom: 1px solid var(--ss-border);
+	background:
+		radial-gradient(
+			1200px 500px at 30% 12%,
+			rgba(200, 181, 138, 0.14),
+			transparent 55%
+		),
+		radial-gradient(
+			900px 420px at 80% 20%,
+			rgba(138, 183, 200, 0.1),
+			transparent 60%
+		),
+		linear-gradient(
+			to bottom,
+			rgba(11, 12, 16, 0) 0%,
+			rgba(11, 12, 16, 0.65) 75%,
+			rgba(11, 12, 16, 1) 100%
+		);
+}
+
+.ss-reading__hero::before {
+	content: '';
+	position: absolute;
+	inset: 0;
+	background-image: var(--ss-reading-hero);
+	background-size: cover;
+	background-position: center;
+	/* clearer image presence, still restrained */
+	filter: saturate(1.02) contrast(1.06) brightness(0.82);
+	transform: scale(1.04);
+}
+
+.ss-reading__hero::after {
+	content: '';
+	position: absolute;
+	inset: 0;
+	/* keep the lower fade for page transition, but let the image show */
+	background: linear-gradient(
+		to bottom,
+		rgba(11, 12, 16, 0.18) 0%,
+		rgba(11, 12, 16, 0.55) 70%,
+		rgba(11, 12, 16, 1) 100%
+	);
+}
+
+.ss-reading__header {
+	padding-top: var(--ss-space-6);
+}
+
+.ss-reading__header--over-hero {
+	position: relative;
+	margin-top: calc(-1 * var(--ss-space-7));
+	padding-top: var(--ss-space-5);
+}
+
+/* Localized text scrim: ensures title/dek legibility even on bright hero areas */
+.ss-reading__header--over-hero {
+	display: inline-flex;
+	flex-direction: column;
+	align-items: flex-start;
+}
+
+.ss-reading__header--over-hero > :is(.ss-eyebrow, .ss-h1, .ss-dek) {
+	display: inline;
+	width: fit-content;
+	max-width: min(100%, var(--ss-measure));
+	padding: 0.15rem 0.55rem;
+	border-radius: 12px;
+	background: rgba(11, 12, 16, 0.78);
+	border: 1px solid rgba(233, 231, 226, 0.1);
+	box-shadow: 0 12px 32px rgba(0, 0, 0, 0.22);
+}
+
+.ss-reading__header--over-hero > .ss-h1 {
+	padding-top: 0.25rem;
+	padding-bottom: 0.35rem;
+}
+
+/* Reading typography: a hair narrower + more open leading */
+.ss-reading .ss-prose {
+	max-width: 62ch;
+	font-family: var(--ss-font-serif);
+	font-size: 1.08rem;
+	line-height: 1.72;
+}
+
+.ss-reading .ss-prose p {
+	margin: 0 0 var(--ss-space-5);
+}
+
+.ss-reading .ss-prose h2,
+.ss-reading .ss-prose h3 {
+	font-family: var(--ss-font-serif);
+	letter-spacing: -0.015em;
+}
+
+.ss-reading .ss-prose h2 {
+	font-size: 1.6rem;
+	margin: var(--ss-space-7) 0 var(--ss-space-3);
+}
+
+.ss-reading .ss-prose h3 {
+	font-size: 1.25rem;
+	margin: var(--ss-space-6) 0 var(--ss-space-2);
+}
+
+.ss-reading .ss-prose a {
+	color: var(--ss-text);
+	text-decoration: none;
+	border-bottom: 1px solid rgba(200, 181, 138, 0.35);
+}
+
+.ss-reading .ss-prose a:hover {
+	border-bottom-color: rgba(200, 181, 138, 0.8);
+}
+
+.ss-reading .ss-prose blockquote {
+	margin: var(--ss-space-6) 0;
+	padding: var(--ss-space-3) var(--ss-space-4);
+	border-left: 2px solid rgba(200, 181, 138, 0.45);
+	background: rgba(17, 19, 26, 0.35);
+	color: var(--ss-muted);
+	border-radius: 10px;
+}
+
+.ss-reading .ss-prose blockquote p {
+	margin: 0;
+}
+
+.ss-reading .ss-prose hr {
+	border: 0;
+	border-top: 1px solid var(--ss-border);
+	margin: var(--ss-space-7) 0;
+}
+
+.ss-reading .ss-prose code {
+	font-family: var(--ss-font-mono);
+	font-size: 0.95em;
+	background: rgba(22, 26, 36, 0.55);
+	border: 1px solid rgba(233, 231, 226, 0.1);
+	padding: 0.1em 0.35em;
+	border-radius: 8px;
+}
+
+.ss-reading .ss-prose pre {
+	overflow: auto;
+	padding: var(--ss-space-4);
+	background: rgba(22, 26, 36, 0.55);
+	border: 1px solid rgba(233, 231, 226, 0.1);
+	border-radius: var(--ss-radius);
+}
+

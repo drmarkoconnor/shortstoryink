@@ -1,0 +1,28 @@
+{
+	"craftTags": [
+		"voice",
+		"image",
+		"character",
+		"point of view",
+		"structure",
+		"scene",
+		"dialogue",
+		"rhythm",
+		"revision",
+		"beginnings",
+		"endings",
+		"noticing",
+		"notebook",
+		"freewriting"
+	],
+	"libraryCollections": [
+		{ "key": "craft", "label": "Craft" },
+		{ "key": "prompts", "label": "Prompts" },
+		{ "key": "revision", "label": "Revision" },
+		{ "key": "freewriting", "label": "Freewriting" },
+		{ "key": "short-story", "label": "Short story" },
+		{ "key": "poetry", "label": "Poetry" },
+		{ "key": "novel", "label": "Novel" }
+	]
+}
+

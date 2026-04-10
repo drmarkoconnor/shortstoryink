@@ -1,0 +1,72 @@
+---
+layout: layouts/public.njk
+title: Try writing
+dek: Begin with a sentence.
+description: A calm, low-friction writing room. Write first. Submit when ready.
+---
+
+<section class="ss-try ss-stack">
+  <div class="ss-try__frame ss-stack">
+    <div class="ss-try__intro ss-stack">
+      <p class="ss-muted">You do not need an account to begin. Write first. We’ll ask where to send your piece only when you’re ready to submit it.</p>
+    </div>
+
+    <form class="ss-try__form ss-stack" action="#" method="post">
+      <div class="ss-try__field ss-stack">
+        <label class="ss-try__label" for="try-draft">Your draft</label>
+        <textarea
+          class="ss-try__textarea"
+          id="try-draft"
+          name="draft"
+          rows="16"
+          placeholder="Start here…"
+        ></textarea>
+      </div>
+
+      <p class="ss-try__drafterror" data-try-drafterror hidden>Add a few lines first — even a paragraph is enough.</p>
+
+      <div class="ss-try__actions">
+        <button class="ss-button ss-button--danger" type="button" data-try-submit>Submit your piece</button>
+        <button class="ss-button" type="button" data-try-keepwriting hidden>Keep writing</button>
+        <p class="ss-muted ss-try__note">No account yet. This is a first-draft flow.</p>
+      </div>
+
+      <section class="ss-trygate" aria-label="Submission" data-try-gate hidden>
+        <div class="ss-trygate__inner ss-stack">
+          <header class="ss-stack" style="margin-top:0">
+            <h2 class="ss-trygate__title">Where should we send confirmation and feedback?</h2>
+            <p class="ss-muted">We only ask for your details when you decide to submit.</p>
+            <p class="ss-muted">Your writing remains yours. Submission does not change your authorship or ownership.</p>
+          </header>
+
+          <div class="ss-trygate__grid">
+            <div class="ss-trygate__field ss-stack">
+              <label class="ss-try__label" for="try-email">Email address <span class="ss-trygate__req">(required)</span></label>
+              <input class="ss-trygate__input" id="try-email" name="email" type="email" autocomplete="email" required placeholder="you@domain.com" />
+            </div>
+
+            <div class="ss-trygate__field ss-stack">
+              <label class="ss-try__label" for="try-firstname">First name <span class="ss-muted">(optional)</span></label>
+              <input class="ss-trygate__input" id="try-firstname" name="firstName" type="text" autocomplete="given-name" placeholder="Sam" />
+            </div>
+          </div>
+
+          <div class="ss-trygate__actions">
+            <button class="ss-button ss-button--danger" type="submit" data-try-finalsubmit>Submit your piece</button>
+          </div>
+        </div>
+      </section>
+
+      <section class="ss-trysuccess" aria-label="Received" data-try-success hidden>
+        <div class="ss-trysuccess__inner ss-stack">
+          <h2 class="ss-trysuccess__title">Your piece has been received.</h2>
+          <p class="ss-muted">We’ve captured your submission and sent confirmation to your email address.</p>
+          <div class="ss-trysuccess__actions">
+            <a class="ss-button" href="/">Return home</a>
+            <button class="ss-button" type="button" data-try-another>Write another piece</button>
+          </div>
+        </div>
+      </section>
+    </form>
+  </div>
+</section>

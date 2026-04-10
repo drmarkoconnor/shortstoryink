@@ -1,0 +1,15 @@
+---
+layout: layouts/base.njk
+---
+
+<section class="ss-container ss-stack">
+  <header class="ss-appheader ss-stack">
+    <p class="ss-eyebrow">Member area (static shell for now)</p>
+    <h1 class="ss-h1">{{ title }}</h1>
+    {% if dek %}<p class="ss-dek">{{ dek }}</p>{% endif %}
+
+    {% include "components/appnav.njk" %}
+  </header>
+
+  {{ content | safe }}
+</section>

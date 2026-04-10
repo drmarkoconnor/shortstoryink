@@ -1,0 +1,22 @@
+---
+layout: layouts/base.njk
+---
+
+<section class="ss-reading">
+  {# Reading Room gets its own typography + optional hero wash #}
+  <link rel="stylesheet" href="/assets/css/reading.css" />
+
+  {% if heroImage %}
+    <div class="ss-reading__hero" style="--ss-reading-hero: url('{{ heroImage }}');" aria-hidden="true"></div>
+  {% endif %}
+
+  <header class="ss-reading__header ss-container ss-stack{% if heroImage %} ss-reading__header--over-hero{% endif %}">
+    <p class="ss-eyebrow">Reading Room</p>
+    <h1 class="ss-h1">{{ title }}</h1>
+    {% if dek %}<p class="ss-dek">{{ dek }}</p>{% endif %}
+  </header>
+
+  <article class="ss-prose ss-container">
+    {{ content | safe }}
+  </article>
+</section>

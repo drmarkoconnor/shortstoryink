@@ -1,0 +1,20 @@
+<header class="ss-header">
+  <div class="ss-container ss-header__inner">
+    <a class="ss-brand" href="/">
+      <span class="ss-brand__name">{{ site.name }}</span>
+    </a>
+
+    <div class="ss-header__actions">
+      <details class="ss-navdetails">
+        <summary class="ss-navdetails__summary">Menu</summary>
+        <nav class="ss-navdetails__panel" aria-label="Primary">
+          <ul class="ss-navdetails__list">
+            {% for item in site.nav.public %}
+              <li><a class="ss-navdetails__link" href="{{ item.href }}">{{ item.label }}</a></li>
+            {% endfor %}
+          </ul>
+        </nav>
+      </details>
+    </div>
+  </div>
+</header>

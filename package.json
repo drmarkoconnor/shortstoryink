@@ -1,0 +1,21 @@
+{
+	"name": "shortstoryink",
+	"private": true,
+	"version": "0.1.0",
+	"type": "module",
+	"scripts": {
+		"dev": "npx @11ty/eleventy --serve --quiet",
+		"build": "npm run clean --silent && npx @11ty/eleventy --quiet",
+		"start": "npx @11ty/eleventy --serve --quiet",
+		"preview": "npm run build --silent && npm run start --silent",
+		"clean": "rm -rf _site .cache"
+	},
+	"devDependencies": {
+		"@11ty/eleventy": "^3.0.0",
+		"serve": "14.2.4"
+	},
+	"dependencies": {
+		"word-extractor": "1.0.4"
+	}
+}
+

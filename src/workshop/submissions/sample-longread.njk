@@ -1,0 +1,50 @@
+---
+layout: layouts/workshop.njk
+title: Submission (long sample)
+dek: A longer sample to validate fiction layout and future inline feedback anchors.
+format: fiction
+spacing: double
+font: serif
+indent: true
+---
+
+{#
+  Phase 2/3 note:
+  - This is a prototype reading surface.
+  - In Phase 3 we’ll convert paragraphs into stable, addressable blocks for inline comments.
+  - For now, we focus on preserving fiction layout and reading comfort.
+#}
+
+{% set classes = ["ss-submission"] %}
+{% if spacing == "double" %}{% set classes = classes.concat(["ss-submission--double"]) %}{% endif %}
+{% if indent %}{% set classes = classes.concat(["ss-submission--indent"]) %}{% endif %}
+{% if font == "mono" %}{% set classes = classes.concat(["ss-submission--mono"]) %}{% endif %}
+
+<article class="ss-panel">
+  <header class="ss-stack" style="margin-bottom: var(--ss-space-4)">
+    <p class="ss-muted"><strong>Author:</strong> (placeholder) · <strong>Word count:</strong> ~4,100</p>
+    <p class="ss-muted"><strong>Display mode:</strong> {{ font }}{% if spacing %}, {{ spacing }} spacing{% endif %}{% if indent %}, paragraph indent{% endif %}</p>
+  </header>
+
+  <div class="{{ classes | join(' ') }}">
+    <p class="ss-noindent">Mark O’Connor — <em>Certifiable Love</em> (sample extract)</p>
+
+    <p class="ss-noindent">‘Mr Gilmour, don't push. Wait your turn like the rest of us.’</p>
+    <p>Typical, so much fuss over a little prod. She had scrunched up her nose too, so that her eyes were narrow slits.</p>
+    <p>We were waiting for our end of course certificates, and Taylor had asked us to form a queue.</p>
+
+    <p class="ss-scene-break">##</p>
+
+    <p class="ss-noindent">I looked around the flat and tried to see it with a new eye, the eye of an important guest.</p>
+    <p>On the polished oak floor of the main room, a two-seater leather buttoned Chesterfield and mahogany penny-table, took centre stage.</p>
+    <p>The living area was open plan with no dividing wall between the hallway and the main room.</p>
+
+    <p class="ss-scene-break">##</p>
+
+    <p class="ss-noindent">‘Fuck me, that's taken my nail off.’</p>
+    <p>Holly was sitting in the doorway, sucking on her index finger.</p>
+    <p>I saw my certificate folded in half, guillotined by the letter box.</p>
+
+    <p class="ss-muted"><em>Note:</em> This is a shortened extract for now. Next step is to ingest your full sample text and render it as addressable paragraphs for inline feedback.</p>
+  </div>
+</article>

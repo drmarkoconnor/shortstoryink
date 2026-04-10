@@ -1,0 +1,112 @@
+*,
+*::before,
+*::after {
+	box-sizing: border-box;
+}
+html {
+	color-scheme: dark;
+}
+body {
+	margin: 0;
+	background: var(--ss-bg);
+	color: var(--ss-text);
+	font-family: var(--ss-font-sans);
+	line-height: 1.55;
+}
+a {
+	color: inherit;
+}
+img {
+	max-width: 100%;
+	height: auto;
+}
+.ss-skip {
+	position: absolute;
+	left: -999px;
+	top: auto;
+	width: 1px;
+	height: 1px;
+	overflow: hidden;
+}
+.ss-skip:focus {
+	left: var(--ss-space-4);
+	top: var(--ss-space-4);
+	width: auto;
+	height: auto;
+	padding: var(--ss-space-2) var(--ss-space-3);
+	background: var(--ss-surface);
+	border: 1px solid var(--ss-border);
+	border-radius: 10px;
+	z-index: 10;
+}
+
+.ss-h1 {
+	font-family: var(--ss-font-serif);
+	font-weight: 600;
+	letter-spacing: -0.02em;
+	line-height: 1.12;
+	font-size: clamp(2rem, 4vw, 3rem);
+	margin: 0;
+}
+.ss-dek {
+	max-width: var(--ss-measure);
+	color: var(--ss-muted);
+	font-size: 1.1rem;
+	margin: 0;
+}
+.ss-eyebrow {
+	margin: 0;
+	color: var(--ss-faint);
+	font-size: 0.95rem;
+	letter-spacing: 0.02em;
+	text-transform: none;
+}
+.ss-muted {
+	color: var(--ss-muted);
+	margin: 0;
+}
+
+.ss-link {
+	color: var(--ss-text);
+	text-decoration: none;
+	border-bottom: 1px solid rgba(200, 181, 138, 0.35);
+}
+.ss-link:hover {
+	border-bottom-color: rgba(200, 181, 138, 0.75);
+}
+
+/* Low-emphasis links (e.g. footer legal) */
+.ss-link--quiet {
+	color: var(--ss-muted);
+	opacity: 0.72;
+	border-bottom-color: rgba(233, 231, 226, 0.14);
+}
+.ss-link--quiet:hover {
+	color: var(--ss-text);
+	opacity: 0.9;
+	border-bottom-color: rgba(233, 231, 226, 0.28);
+}
+
+.ss-button {
+	display: inline-flex;
+	align-items: center;
+	gap: 0.5rem;
+	padding: 0.55rem 0.85rem;
+	border-radius: 999px;
+	background: rgba(200, 181, 138, 0.14);
+	border: 1px solid rgba(200, 181, 138, 0.35);
+	text-decoration: none;
+}
+.ss-button:hover {
+	background: rgba(200, 181, 138, 0.2);
+}
+
+/* Accent CTA (used sparingly, e.g. home hero) */
+.ss-button--danger {
+	background: rgba(220, 70, 70, 0.14);
+	border-color: rgba(220, 70, 70, 0.42);
+}
+.ss-button--danger:hover {
+	background: rgba(220, 70, 70, 0.22);
+}
+

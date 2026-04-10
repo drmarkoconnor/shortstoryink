@@ -1,0 +1,9 @@
+<nav class="ss-appnav" aria-label="Member navigation">
+  <ul class="ss-appnav__list">
+    {% for item in site.nav.app %}
+      <li><a class="ss-appnav__link" href="{{ item.href }}">{{ item.label }}</a></li>
+    {% endfor %}
+    <li><a class="ss-appnav__link" href="/account/">{{ ui.labels.account }}</a></li>
+    <li><a class="ss-appnav__link" href="/admin/">{{ ui.labels.admin }}</a></li>
+  </ul>
+</nav>

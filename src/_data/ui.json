@@ -1,0 +1,16 @@
+{
+	"labels": {
+		"signIn": "Sign in",
+		"signUp": "Sign up",
+		"studio": "Studio",
+		"workshop": "Workshop",
+		"library": "Library",
+		"readingRoom": "Reading Room",
+		"snippets": "Snippets",
+		"cohorts": "Cohorts",
+		"freewriting": "Freewriting",
+		"account": "Account",
+		"admin": "Admin"
+	}
+}
+

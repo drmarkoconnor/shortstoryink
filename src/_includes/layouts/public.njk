@@ -1,0 +1,14 @@
+---
+layout: layouts/base.njk
+---
+
+<section class="ss-container ss-stack">
+  {% if title %}
+    <header class="ss-pageheader ss-stack">
+      <h1 class="ss-h1">{{ title }}</h1>
+      {% if dek %}<p class="ss-dek">{{ dek }}</p>{% endif %}
+    </header>
+  {% endif %}
+
+  {{ content | safe }}
+</section>

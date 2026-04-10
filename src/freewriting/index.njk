@@ -1,0 +1,37 @@
+---
+layout: layouts/app.njk
+title: Freewriting
+dek: Timed sessions to reduce inhibition and keep the pen moving.
+---
+
+<div class="ss-stack">
+  <section class="ss-panel ss-stack">
+    <header class="ss-stack" style="gap: var(--ss-space-2)">
+      <h2 style="margin: 0">Freewrite</h2>
+      <p class="ss-muted" style="margin: 0">Plain text on purpose. Formatting is stripped when you paste, so you can keep moving.</p>
+    </header>
+
+    <div class="ss-submitteditor ss-stack" data-ss-submission-editor data-ss-mode="freewrite" data-word-limit="2000">
+      <div class="ss-submitteditor__row">
+        <span class="ss-submitteditor__meta ss-muted" aria-live="polite">
+          <span data-ss-wordcount>0</span> words
+        </span>
+      </div>
+
+      <div class="ss-submitteditor__help ss-muted">
+        Tip: set a timer on your phone (5–15 minutes) and don’t edit. This won’t save yet.
+      </div>
+
+      <div class="ss-submitteditor__editorwrap">
+        <div
+          class="ss-submitteditor__editor ss-submission"
+          contenteditable="true"
+          spellcheck="true"
+          role="textbox"
+          aria-multiline="true"
+          data-ss-editor
+        ><p class="ss-noindent">Start writing…</p></div>
+      </div>
+    </div>
+  </section>
+</div>

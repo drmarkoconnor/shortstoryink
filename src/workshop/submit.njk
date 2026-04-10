@@ -1,0 +1,64 @@
+---
+layout: layouts/workshop.njk
+title: Submit
+---
+
+<div class="ss-stack">
+  <section class="ss-panel ss-stack">
+    <header class="ss-stack" style="gap: var(--ss-space-2)">
+      <h2 style="margin: 0">New submission</h2>
+      <p class="ss-muted" style="margin: 0">Text-first. You can type here, paste from Word, or upload a <code>.doc</code> (legacy Word) file. Freewriting will later ignore formatting; Workshop submissions preserve it.</p>
+    </header>
+
+    <div class="ss-submitteditor ss-stack" data-ss-submission-editor data-word-limit="500">
+      <div class="ss-submitteditor__row">
+        <label class="ss-button">
+          Upload .doc
+          <input class="ss-submitteditor__file" type="file" accept=".doc" hidden>
+        </label>
+        <button class="ss-button" type="button" data-ss-cmd="bold" aria-label="Bold"><strong>B</strong></button>
+        <button class="ss-button" type="button" data-ss-cmd="italic" aria-label="Italic"><em>I</em></button>
+        <button class="ss-button" type="button" data-ss-cmd="underline" aria-label="Underline"><u>U</u></button>
+        <button class="ss-button" type="button" data-ss-cmd="insertUnorderedList" aria-label="Bulleted list">• List</button>
+        <button class="ss-button" type="button" data-ss-cmd="insertOrderedList" aria-label="Numbered list">1. List</button>
+        <button class="ss-button" type="button" data-ss-cmd="indent" aria-label="Indent">Indent</button>
+        <button class="ss-button" type="button" data-ss-cmd="outdent" aria-label="Outdent">Outdent</button>
+        <button class="ss-button" type="button" data-ss-action="sceneBreak" aria-label="Scene break">##</button>
+        <button class="ss-button" type="button" data-ss-action="noIndent" aria-label="Toggle no-indent paragraph">No indent</button>
+        <span class="ss-submitteditor__meta ss-muted" aria-live="polite">
+          <span data-ss-wordcount>0</span>/500 words
+        </span>
+      </div>
+
+      <div class="ss-submitteditor__status ss-muted" data-ss-status>
+        Editor status: <span data-ss-status-text>loading…</span>
+      </div>
+
+      <div class="ss-submitteditor__help ss-muted">
+        Tip: paste normally; the editor will keep paragraphs and italics. Use <kbd>Enter</kbd> for new paragraphs.
+      </div>
+
+      <div class="ss-submitteditor__editorwrap">
+        <div
+          class="ss-submitteditor__editor ss-submission ss-submission--double ss-submission--indent"
+          contenteditable="true"
+          spellcheck="true"
+          role="textbox"
+          aria-multiline="true"
+          data-ss-editor
+        ><p class="ss-noindent">Paste or type…</p></div>
+      </div>
+
+      <details class="ss-muted" style="margin-top: var(--ss-space-2)">
+        <summary>About formatting (v1)</summary>
+        <ul>
+          <li>Preserved: paragraphs, italics, and simple line breaks.</li>
+          <li>Not yet: custom margins, fonts, page breaks, footnotes, and complex styling.</li>
+          <li>Word limit: enforced at 500 words (extra words are trimmed).</li>
+        </ul>
+      </details>
+    </div>
+
+    <p class="ss-muted" style="margin-top: var(--ss-space-3)"><em>Note:</em> This is front-end only; nothing saves yet. Next step is stable paragraph anchors for inline teacher feedback.</p>
+  </section>
+</div>
