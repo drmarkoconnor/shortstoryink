@@ -13,12 +13,30 @@ const SUPABASE_URL =
 		: null)
 
 const SUPABASE_SERVICE_ROLE_KEY = process.env.SUPABASE_SERVICE_ROLE_KEY
-const SITE_URL = process.env.URL || 'http://localhost:8888'
 const RESEND_API_KEY = process.env.RESEND_API_KEY || ''
 const EMAIL_FROM =
 	process.env.FEEDBACK_EMAIL_FROM ||
 	process.env.EMAIL_FROM ||
 	'noreply@shortstory.ink'
+
+function resolveSiteUrl(event) {
+	const forwardedProto = event?.headers?.['x-forwarded-proto']
+	const forwardedHost = event?.headers?.['x-forwarded-host']
+	const host = forwardedHost || event?.headers?.host
+
+	if (host) {
+		const proto =
+			forwardedProto || (host.includes('localhost') ? 'http' : 'https')
+		return `${proto}://${host}`
+	}
+
+	return (
+		process.env.URL ||
+		process.env.DEPLOY_PRIME_URL ||
+		process.env.DEPLOY_URL ||
+		'http://localhost:8888'
+	)
+}
 
 function esc(s = '') {
 	return String(s)
@@ -143,7 +161,7 @@ async function getPublishReadiness(versionId) {
 	}
 }
 
-async function createLink(submissionId, days, allowEmpty = false) {
+async function createLink(submissionId, days, allowEmpty = false, siteUrl) {
 	const [submission] = await sb(
 		`submissions?id=eq.${submissionId}&select=id,status,latest_version_id,writer_first_name,writer_email&limit=1`,
 	)
@@ -179,7 +197,7 @@ async function createLink(submissionId, days, allowEmpty = false) {
 	})
 	if (!rows?.length) throw new Error('Submission not found')
 
-	const link = `${SITE_URL}/.netlify/functions/writer-feedback-preview?token=${encodeURIComponent(token)}`
+	const link = `${siteUrl}/.netlify/functions/writer-feedback-preview?token=${encodeURIComponent(token)}`
 	return {
 		link,
 		expiresAt,
@@ -197,6 +215,7 @@ export async function handler(event) {
 	try {
 		// Browser-friendly GET: ?submissionId=...&days=90
 		if (event.httpMethod === 'GET') {
+			const siteUrl = resolveSiteUrl(event)
 			const submissionId = (
 				event.queryStringParameters?.submissionId || ''
 			).trim()
@@ -211,7 +230,7 @@ export async function handler(event) {
 				wasReissue,
 				writerName,
 				writerEmail,
-			} = await createLink(submissionId, days, allowEmpty)
+			} = await createLink(submissionId, days, allowEmpty, siteUrl)
 
 			const emailResult = await sendWriterFeedbackEmail({
 				to: writerEmail,
@@ -269,6 +288,7 @@ export async function handler(event) {
 
 		// API POST still supported
 		if (event.httpMethod === 'POST') {
+			const siteUrl = resolveSiteUrl(event)
 			const {
 				submissionId,
 				days = 90,
@@ -277,7 +297,12 @@ export async function handler(event) {
 			} = JSON.parse(event.body || '{}')
 			if (!submissionId)
 				return json(400, { ok: false, error: 'submissionId required' })
-			const result = await createLink(submissionId, days, Boolean(allowEmpty))
+			const result = await createLink(
+				submissionId,
+				days,
+				Boolean(allowEmpty),
+				siteUrl,
+			)
 			const emailResult = sendEmail
 				? await sendWriterFeedbackEmail({
 						to: result.writerEmail,
