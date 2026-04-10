@@ -20,7 +20,8 @@ Purpose: verify end-to-end product reliability before visual refinements.
 
 1. Submit a draft via `/try/`
    - Expected: success state shown
-   - Expected DB: submission created, version created, `latest_version_id` set, paragraph anchors saved
+   - Expected DB: submission created, version created, `latest_version_id` set,
+     paragraph anchors saved
 
 2. Teacher login
    - Expected: redirected to submissions list
@@ -72,27 +73,29 @@ Purpose: verify end-to-end product reliability before visual refinements.
 ## Pre-signoff UX fixes (required)
 
 - Improve invalid writer-link page in `writer-feedback-preview`:
-   - Replace technical/abrupt message with friendly explanation.
-   - Explain likely causes in plain language:
-      - link expired
-      - a newer feedback link replaced this one (reissue)
-   - Add clear next actions/links:
-      - return to home page (`/`)
-      - contact teacher guidance sentence
+  - Replace technical/abrupt message with friendly explanation.
+  - Explain likely causes in plain language:
+    - link expired
+    - a newer feedback link replaced this one (reissue)
+  - Add clear next actions/links:
+    - return to home page (`/`)
+    - contact teacher guidance sentence
 - Acceptance criteria:
-   - No raw/ambiguous “invalid link” dead end page.
-   - Writer always sees a clear reason + at least one useful next step.
+  - No raw/ambiguous “invalid link” dead end page.
+  - Writer always sees a clear reason + at least one useful next step.
 
 ## Quick defect log template
 
-| ID | Scenario | Expected | Actual | Severity | Status |
-|----|----------|----------|--------|----------|--------|
-| Q1 |          |          |        |          |        |
-| Q2 |          |          |        |          |        |
+| ID  | Scenario | Expected | Actual | Severity | Status |
+| --- | -------- | -------- | ------ | -------- | ------ |
+| Q1  |          |          |        |          |        |
+| Q2  |          |          |        |          |        |
 
 ## Exit criteria
 
 - All smoke sequence steps pass
 - No 500 errors in function logs for core flows
 - No blocker/high-severity defects open
-- Optional email verification passes (or is explicitly deferred with manual-share fallback accepted)
+- Optional email verification passes (or is explicitly deferred with
+  manual-share fallback accepted)
+

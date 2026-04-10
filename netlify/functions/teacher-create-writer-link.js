@@ -1,5 +1,10 @@
 import crypto from 'node:crypto'
-import { html, json, renderTeacherPage, requireTeacher } from './_lib/teacher-auth.js'
+import {
+	html,
+	json,
+	renderTeacherPage,
+	requireTeacher,
+} from './_lib/teacher-auth.js'
 
 const SUPABASE_URL =
 	process.env.SUPABASE_URL ||
@@ -196,8 +201,7 @@ export async function handler(event) {
 				event.queryStringParameters?.submissionId || ''
 			).trim()
 			const days = normalizeDays(event.queryStringParameters?.days || 90)
-			const allowEmpty =
-				event.queryStringParameters?.allowEmpty === '1'
+			const allowEmpty = event.queryStringParameters?.allowEmpty === '1'
 			if (!submissionId) return html(400, '<p>Missing submissionId.</p>')
 
 			const {
@@ -230,10 +234,15 @@ export async function handler(event) {
 				200,
 				renderTeacherPage({
 					title: wasReissue ? 'Writer link reissued' : 'Writer link published',
-					heading: wasReissue ? 'Writer link reissued' : 'Writer link published',
+					heading: wasReissue
+						? 'Writer link reissued'
+						: 'Writer link published',
 					maxWidth: '760px',
 					nav: [
-						{ href: '/.netlify/functions/teacher-submissions', label: 'Submissions' },
+						{
+							href: '/.netlify/functions/teacher-submissions',
+							label: 'Submissions',
+						},
 						{
 							href: `/.netlify/functions/teacher-feedback-preview?submissionId=${encodeURIComponent(submissionId)}`,
 							label: 'Review submission',
@@ -265,9 +274,7 @@ export async function handler(event) {
 				days = 90,
 				allowEmpty = false,
 				sendEmail = true,
-			} = JSON.parse(
-				event.body || '{}',
-			)
+			} = JSON.parse(event.body || '{}')
 			if (!submissionId)
 				return json(400, { ok: false, error: 'submissionId required' })
 			const result = await createLink(submissionId, days, Boolean(allowEmpty))
@@ -278,7 +285,7 @@ export async function handler(event) {
 						link: result.link,
 						expiresAt: result.expiresAt,
 						wasReissue: result.wasReissue,
-				  })
+					})
 				: { sent: false, skipped: true, reason: 'send_email_disabled' }
 			return json(200, { ok: true, ...result, email: emailResult })
 		}
@@ -299,7 +306,10 @@ export async function handler(event) {
 						heading: 'Publish check',
 						maxWidth: '760px',
 						nav: [
-							{ href: '/.netlify/functions/teacher-submissions', label: 'Submissions' },
+							{
+								href: '/.netlify/functions/teacher-submissions',
+								label: 'Submissions',
+							},
 							{
 								href: `/.netlify/functions/teacher-feedback-preview?submissionId=${encodeURIComponent(submissionId)}`,
 								label: 'Review submission',
@@ -323,7 +333,10 @@ export async function handler(event) {
 					heading: 'Cannot publish writer link',
 					maxWidth: '760px',
 					nav: [
-						{ href: '/.netlify/functions/teacher-submissions', label: 'Submissions' },
+						{
+							href: '/.netlify/functions/teacher-submissions',
+							label: 'Submissions',
+						},
 						{ href: '/.netlify/functions/teacher-logout', label: 'Log out' },
 					],
 					content: `<p class="tt-msg tt-msg--err">${esc(String(e.message || 'Unexpected error'))}</p>`,

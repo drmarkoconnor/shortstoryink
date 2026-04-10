@@ -24,7 +24,9 @@ function esc(s = '') {
 
 function normalizeUuid(value = '') {
 	const v = String(value).trim().split('?')[0]
-	return /^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i.test(v)
+	return /^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i.test(
+		v,
+	)
 		? v
 		: ''
 }
@@ -42,16 +44,19 @@ async function sb(path) {
 
 async function sbPatch(path, payload) {
 	const separator = path.includes('?') ? '&' : '?'
-	const r = await fetch(`${SUPABASE_URL}/rest/v1/${path}${separator}select=id`, {
-		method: 'PATCH',
-		headers: {
-			apikey: SUPABASE_SERVICE_ROLE_KEY,
-			Authorization: `Bearer ${SUPABASE_SERVICE_ROLE_KEY}`,
-			'content-type': 'application/json',
-			Prefer: 'return=representation',
+	const r = await fetch(
+		`${SUPABASE_URL}/rest/v1/${path}${separator}select=id`,
+		{
+			method: 'PATCH',
+			headers: {
+				apikey: SUPABASE_SERVICE_ROLE_KEY,
+				Authorization: `Bearer ${SUPABASE_SERVICE_ROLE_KEY}`,
+				'content-type': 'application/json',
+				Prefer: 'return=representation',
+			},
+			body: JSON.stringify(payload),
 		},
-		body: JSON.stringify(payload),
-	})
+	)
 	if (!r.ok) throw new Error(await r.text())
 	return r.json()
 }
@@ -140,7 +145,8 @@ export async function handler(event) {
 			return {
 				statusCode: 302,
 				headers: {
-					Location: '/.netlify/functions/teacher-submissions?error=missingSubmission',
+					Location:
+						'/.netlify/functions/teacher-submissions?error=missingSubmission',
 				},
 				body: '',
 			}
@@ -152,7 +158,8 @@ export async function handler(event) {
 				return {
 					statusCode: 302,
 					headers: {
-						Location: '/.netlify/functions/teacher-submissions?error=missingSubmission',
+						Location:
+							'/.netlify/functions/teacher-submissions?error=missingSubmission',
 					},
 					body: '',
 				}
@@ -181,7 +188,8 @@ export async function handler(event) {
 			return {
 				statusCode: 302,
 				headers: {
-					Location: '/.netlify/functions/teacher-submissions?error=missingSubmission',
+					Location:
+						'/.netlify/functions/teacher-submissions?error=missingSubmission',
 				},
 				body: '',
 			}
@@ -210,13 +218,16 @@ export async function handler(event) {
 				return feedbackRedirect(submissionId, 'error=missingSummary')
 			}
 
-			await sbUpsert('review_summaries?on_conflict=submission_version_id&select=id', {
-				submission_id: submissionId,
-				submission_version_id: submissionVersionId,
-				author_id: auth.user.id,
-				body,
-				updated_at: new Date().toISOString(),
-			})
+			await sbUpsert(
+				'review_summaries?on_conflict=submission_version_id&select=id',
+				{
+					submission_id: submissionId,
+					submission_version_id: submissionVersionId,
+					author_id: auth.user.id,
+					body,
+					updated_at: new Date().toISOString(),
+				},
+			)
 
 			return feedbackRedirect(submissionId, 'summarySaved=1')
 		}
@@ -361,7 +372,10 @@ export async function handler(event) {
 			heading: 'Teacher feedback',
 			maxWidth: '860px',
 			nav: [
-				{ href: '/.netlify/functions/teacher-submissions', label: 'Submissions' },
+				{
+					href: '/.netlify/functions/teacher-submissions',
+					label: 'Submissions',
+				},
 				{
 					href: `/.netlify/functions/teacher-create-writer-link?submissionId=${encodeURIComponent(submission.id)}`,
 					label: 'Publish / reissue writer link',

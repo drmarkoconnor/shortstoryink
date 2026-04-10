@@ -66,7 +66,9 @@ export async function handler(event) {
 	if (!['teacher', 'admin'].includes(role)) {
 		return {
 			statusCode: 302,
-			headers: { Location: '/.netlify/functions/teacher-login?error=forbidden' },
+			headers: {
+				Location: '/.netlify/functions/teacher-login?error=forbidden',
+			},
 			body: '',
 		}
 	}
@@ -80,3 +82,4 @@ export async function handler(event) {
 		body: '',
 	}
 }
+

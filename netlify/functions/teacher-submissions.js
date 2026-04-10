@@ -1,4 +1,9 @@
-import { escHtml, html, renderTeacherPage, requireTeacher } from './_lib/teacher-auth.js'
+import {
+	escHtml,
+	html,
+	renderTeacherPage,
+	requireTeacher,
+} from './_lib/teacher-auth.js'
 
 const SUPABASE_URL =
 	process.env.SUPABASE_URL ||
@@ -43,9 +48,7 @@ export async function handler(event) {
 			`submissions?select=id,writer_first_name,writer_email,created_at,latest_version_id,status&order=created_at.desc&limit=50`,
 		)
 
-		const versionIds = rows
-			.map((r) => r.latest_version_id)
-			.filter(Boolean)
+		const versionIds = rows.map((r) => r.latest_version_id).filter(Boolean)
 
 		const summaryRows = versionIds.length
 			? await sb(
@@ -97,7 +100,10 @@ export async function handler(event) {
 				title: 'Teacher submissions',
 				heading: 'Teacher submissions',
 				nav: [
-					{ href: '/.netlify/functions/teacher-submissions', label: 'Submissions' },
+					{
+						href: '/.netlify/functions/teacher-submissions',
+						label: 'Submissions',
+					},
 					{ href: '/.netlify/functions/teacher-logout', label: 'Log out' },
 				],
 				maxWidth: '1080px',
