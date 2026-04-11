@@ -32,6 +32,20 @@ function resolveSiteUrl(event) {
 	)
 }
 
+function resolveAuthRedirectBaseUrl(event) {
+	const explicit =
+		process.env.AUTH_REDIRECT_BASE_URL ||
+		process.env.PUBLIC_SITE_URL ||
+		process.env.SITE_URL ||
+		''
+
+	if (explicit.trim()) {
+		return explicit.trim().replace(/\/$/, '')
+	}
+
+	return resolveSiteUrl(event)
+}
+
 function redirectWithMessage(kind, message) {
 	const safeMessage = encodeURIComponent(message)
 	return {
@@ -233,8 +247,9 @@ export async function handler(event) {
 	const email = (params.get('email') || '').trim().toLowerCase()
 	const password = params.get('password') || ''
 	const firstName = (params.get('firstName') || '').trim()
-	const emailRedirectTo = `${resolveSiteUrl(event)}/.netlify/functions/writer-login?ok=Email+confirmed.+You+can+sign+in+now.`
-	const resetRedirectTo = `${resolveSiteUrl(event)}/.netlify/functions/writer-login`
+	const authBaseUrl = resolveAuthRedirectBaseUrl(event)
+	const emailRedirectTo = `${authBaseUrl}/.netlify/functions/writer-login?ok=Email+confirmed.+You+can+sign+in+now.`
+	const resetRedirectTo = `${authBaseUrl}/.netlify/functions/writer-login`
 
 	try {
 		if (mode === 'reset-request') {
