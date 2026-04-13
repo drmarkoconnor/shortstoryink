@@ -1,5 +1,6 @@
 import {
 	authCookie,
+	escHtml,
 	getProfileRole,
 	html,
 	renderTeacherPage,
@@ -17,6 +18,7 @@ export async function handler(event) {
 	if (event.httpMethod === 'GET') {
 		const invalid = event.queryStringParameters?.error === 'invalid'
 		const forbidden = event.queryStringParameters?.error === 'forbidden'
+		const reason = event.queryStringParameters?.reason || ''
 		return html(
 			200,
 			renderTeacherPage({
@@ -27,6 +29,7 @@ export async function handler(event) {
 					<p class="tt-muted">Use your teacher account to review submissions and publish writer feedback links.</p>
 					${invalid ? '<p class="tt-msg tt-msg--err">Invalid email or password.</p>' : ''}
 					${forbidden ? '<p class="tt-msg tt-msg--err">This account does not have a teacher role.</p>' : ''}
+					${reason ? `<p class="tt-msg tt-msg--warn"><strong>Debug:</strong> ${escHtml(reason)}</p>` : ''}
 					<form class="tt-panel" method="post" action="/.netlify/functions/teacher-login">
 						<label for="teacher-email">Email</label>
 						<input id="teacher-email" type="email" name="email" autocomplete="email" required />
@@ -54,9 +57,16 @@ export async function handler(event) {
 	})
 
 	if (!r.ok) {
+		const body = await r.json().catch(() => ({}))
+		const reason =
+			body?.error_description ||
+			body?.msg ||
+			body?.error ||
+			`auth_error_${r.status}`
+		const query = new URLSearchParams({ error: 'invalid', reason }).toString()
 		return {
 			statusCode: 302,
-			headers: { Location: '/.netlify/functions/teacher-login?error=invalid' },
+			headers: { Location: `/.netlify/functions/teacher-login?${query}` },
 			body: '',
 		}
 	}
